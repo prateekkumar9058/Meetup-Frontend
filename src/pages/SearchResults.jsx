@@ -10,12 +10,20 @@ const SearchResults = () => {
   );
 
   let getEvents;
+  let searchQuery1 =
+    query.searchQuery.charAt(0).toUpperCase() + query.searchQuery.slice(1);
+  let searchQuery2 =
+    query.searchQuery.charAt(0).toLowerCase() + query.searchQuery.slice(1);
+
   if (data) {
     getEvents = data.reduce((arr, curr) => {
-      curr.title.includes(query.searchQuery) && arr.push(curr);
+      (curr.title.includes(searchQuery1) ||
+        curr.title.includes(searchQuery2)) &&
+        arr.push(curr);
       return arr;
     }, []);
   }
+
   return (
     <>
       <Header />

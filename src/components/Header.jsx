@@ -11,7 +11,9 @@ const Header = () => {
 
   const keyDownHandler = (e) => {
     if (e.key === "Enter") {
-      window.location.href = `/searchResults/${query}`;
+      window.location.href = `/searchResults/${
+        query.charAt(0).toUpperCase() + query.slice(1)
+      }`;
     }
   };
   const style = {
