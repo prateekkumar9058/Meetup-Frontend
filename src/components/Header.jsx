@@ -33,7 +33,12 @@ const Header = () => {
     <>
       <header className="container bg-light mt-3">
         <div className="container mb-4">
-          <NavLink to="/">
+          <NavLink
+            style={{
+              textDecoration: "none",
+            }}
+            to="/"
+          >
             <h2 style={style}>Meetup</h2>
           </NavLink>
           <img
