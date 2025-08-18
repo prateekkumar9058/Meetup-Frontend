@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const SearchResults = () => {
   const query = useParams();
   const { data, loading } = useFetch(
-    `https://meetup-backend-pi.vercel.app/events`
+    `https://meetup-backend-pi.vercel.app/events/`
   );
 
   let getEvents;
