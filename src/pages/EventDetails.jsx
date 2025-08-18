@@ -101,7 +101,12 @@ const EventDetails = () => {
                     }}
                     className="col-md-5 py-2"
                   >
-                    <div className="text-center">
+                    <div
+                      style={{
+                        display: "ruby",
+                      }}
+                      className="text-center"
+                    >
                       <div
                         style={{
                           width: "100px",
