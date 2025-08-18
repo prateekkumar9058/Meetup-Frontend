@@ -33,7 +33,9 @@ const Header = () => {
     <>
       <header className="container bg-light mt-3">
         <div className="container mb-4">
-          <h2 style={style}>Meetup</h2>
+          <NavLink to="/">
+            <h2 style={style}>Meetup</h2>
+          </NavLink>
           <img
             style={searchStyle}
             src="https://img.icons8.com/?size=100&id=XU3XKgdpT0qG&format=png&color=000000"
