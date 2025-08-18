@@ -12,7 +12,9 @@ const SearchResults = () => {
   let getEvents;
   if (data) {
     getEvents = data.reduce((arr, curr) => {
-      curr.title.includes(query.searchQuery) && arr.push(curr);
+      curr.title.includes(query.searchQuery) ||
+        (curr.tags.filter((tag) => tag.includes(query.searchQuery)) &&
+          arr.push(curr));
       return arr;
     }, []);
   }
