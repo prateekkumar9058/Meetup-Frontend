@@ -52,7 +52,7 @@ function App() {
         ) : data && data.length !== 0 ? (
           <div className="row my-3">
             {getEvents.map((event) => (
-              <div className="col-md-4 my-3" key={event.title}>
+              <div className="col-sm-10 col-md-4 my-3" key={event.title}>
                 <Link to={`/eventDetails/${event.title}`}>
                   <div
                     style={{
@@ -79,7 +79,7 @@ function App() {
                   }}
                   to={`/eventDetails/${event.title}`}
                 >
-                  <h5>{event.title}</h5>
+                  <h5 className="fs-5">{event.title}</h5>
                 </Link>
               </div>
             ))}
