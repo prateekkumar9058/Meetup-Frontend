@@ -14,8 +14,9 @@ const EventDetails = () => {
       <Header />
       <main className="container py-4">
         {error && <p>An error occured while fetching the events</p>}
-        {loading && <p>Loading...</p>}
-        {data ? (
+        {loading ? (
+          <p>Loading...</p>
+        ) : data ? (
           <section
             style={{
               display: "flex",

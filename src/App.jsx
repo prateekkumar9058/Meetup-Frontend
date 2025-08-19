@@ -45,20 +45,21 @@ function App() {
             <option value="Both Offline and Online">Both</option>
           </select>
         </div>
-
-        {error && <p>An error occured while fetching the data</p>}
-        {loading && <p>Loading</p>}
-        {data && data.length != 0 ? (
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>An error occurred while fetching the data</p>
+        ) : data && data.length !== 0 ? (
           <div className="row my-3">
             {getEvents.map((event) => (
-              <div className="col-md-4 my-3">
+              <div className="col-md-4 my-3" key={event.title}>
                 <div className="card">
                   <Link to={`/eventDetails/${event.title}`}>
                     <img
                       src={event.imageUrl}
                       height="200px"
-                      className="card-img"
-                      alt="..."
+                      className="img-fluid"
+                      alt="Event"
                     />
                   </Link>
                 </div>

@@ -24,12 +24,16 @@ const SearchResults = () => {
     }, []);
   }
 
+  if (data) {
+  }
+
   return (
     <>
       <Header />
       <main className="container py-4">
-        {loading && <p>Loading</p>}
-        {getEvents && getEvents.length != 0 ? (
+        {loading ? (
+          <p>Loading</p>
+        ) : getEvents && getEvents.length != 0 ? (
           <div className="row my-3">
             <h2>Your search results:</h2>
             {getEvents.map((event) => (
