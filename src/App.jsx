@@ -53,16 +53,24 @@ function App() {
           <div className="row my-3">
             {getEvents.map((event) => (
               <div className="col-md-4 my-3" key={event.title}>
-                <div className="card">
-                  <Link to={`/eventDetails/${event.title}`}>
+                <Link to={`/eventDetails/${event.title}`}>
+                  <div
+                    style={{
+                      width: "330px",
+                      height: "200px",
+                    }}
+                  >
                     <img
                       src={event.imageUrl}
-                      height="200px"
                       className="img-fluid"
-                      alt="Event"
+                      style={{
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                      }}
                     />
-                  </Link>
-                </div>
+                  </div>
+                </Link>
                 <p className="mb-1 text-secondary">{event.startDate}</p>
                 <Link
                   style={{
