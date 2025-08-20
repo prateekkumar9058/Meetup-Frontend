@@ -3,11 +3,8 @@ import { NavLink, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
-  const searhQuery = useParams();
-
+const Header = ({ query, setQuery }) => {
   const navigate = useNavigate();
-  const [query, setQuery] = useState("");
 
   const searchHandler = (event) => {
     setQuery(event.target.value);
@@ -15,9 +12,11 @@ const Header = () => {
 
   const keyDownHandler = (e) => {
     if (e.key === "Enter") {
-      navigate(
-        `/searchResults/${query.charAt(0).toUpperCase() + query.slice(1)}`
-      );
+      e.preventDefault();
+      if (query.trim()) {
+        const formattedQuery = query.charAt(0).toUpperCase() + query.slice(1);
+        navigate(`/searchResults/${formattedQuery}`);
+      }
     }
   };
 
@@ -64,7 +63,7 @@ const Header = () => {
                 onKeyDown={keyDownHandler}
                 className="form-control py-2 text-secondary"
                 type="text"
-                value={searhQuery.searhQuery}
+                value={query}
                 placeholder="Search by title and tags"
               />
             </div>

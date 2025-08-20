@@ -4,13 +4,12 @@ import Header from "./components/Header";
 import useFetch from "./useFetch";
 import { Link } from "react-router-dom";
 function App() {
+  const [query, setQuery] = useState("");
+
   const { data, error, loading } = useFetch(
     `https://meetup-backend-pi.vercel.app/events`
   );
   const [eventType, setEventType] = useState("All");
-
-  const { query } = Header;
-  console.log(query);
 
   const filterHandler = (e) => {
     setEventType(e.target.value);
@@ -26,7 +25,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header query={query} setQuery={setQuery} />
       <main className="container bg-light">
         <h1 style={{ display: "inline" }}>Meetup Events</h1>
         <div className="float-end">
@@ -52,9 +51,10 @@ function App() {
         ) : data && data.length !== 0 ? (
           <div className="row my-3">
             {getEvents.map((event) => (
-              <div className="col-sm-10 col-md-4 my-3" key={event.title}>
+              <div className="col-sm-12 col-md-4 my-3" key={event.title}>
                 <Link to={`/eventDetails/${event.title}`}>
                   <div
+                    className="position-relative"
                     style={{
                       width: "330px",
                       height: "200px",
@@ -62,15 +62,30 @@ function App() {
                   >
                     <img
                       src={event.imageUrl}
-                      className="img-fluid"
+                      className="img-fluid rounded"
                       style={{
                         objectFit: "cover",
                         width: "100%",
                         height: "100%",
                       }}
                     />
+                    <p
+                      style={{
+                        position: "absolute",
+                        top: "10px",
+                        left: "10px",
+                        backgroundColor: "white",
+                        padding: "5px 10px",
+                        borderRadius: "5px",
+                        color: "black",
+                      }}
+                    >
+                      {event.eventMode} Event
+                    </p>
                   </div>
                 </Link>
+
+                {/* Other details below image */}
                 <p className="mb-1 text-secondary">{event.startDate}</p>
                 <Link
                   style={{
