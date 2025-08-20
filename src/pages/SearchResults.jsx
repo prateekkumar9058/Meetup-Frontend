@@ -2,18 +2,21 @@ import { useParams } from "react-router-dom";
 import Header from "../components/Header";
 import useFetch from "../useFetch";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const SearchResults = () => {
-  const query = useParams();
+  const location = useLocation();
   const { data, loading } = useFetch(
     `https://meetup-backend-pi.vercel.app/events/`
   );
 
+  const params = new URLSearchParams(location.search);
+  const query = params.get("query");
+
   let getEvents;
-  let searchQuery1 =
-    query.searchQuery.charAt(0).toUpperCase() + query.searchQuery.slice(1);
-  let searchQuery2 =
-    query.searchQuery.charAt(0).toLowerCase() + query.searchQuery.slice(1);
+  let searchQuery1 = query.charAt(0).toUpperCase() + query.slice(1);
+  let searchQuery2 = query.charAt(0).toLowerCase() + query.slice(1);
 
   if (data) {
     getEvents = data.reduce((arr, curr) => {
@@ -22,9 +25,6 @@ const SearchResults = () => {
         arr.push(curr);
       return arr;
     }, []);
-  }
-
-  if (data) {
   }
 
   return (

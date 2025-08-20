@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <EventDetails />,
   },
   {
-    path: "/searchResults/:searchQuery",
+    path: "/searchResults",
     element: <SearchResults />,
   },
 ]);

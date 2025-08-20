@@ -1,22 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const Header = ({ query, setQuery }) => {
+const Header = () => {
   const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+  const location = useLocation();
 
-  const searchHandler = (event) => {
-    setQuery(event.target.value);
-  };
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const q = params.get("query") || "";
+    setQuery(q);
+  }, [location]);
 
-  const keyDownHandler = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      if (query.trim()) {
-        const formattedQuery = query.charAt(0).toUpperCase() + query.slice(1);
-        navigate(`/searchResults/${formattedQuery}`);
-      }
+  const searchHandler = (e) => {
+    e.preventDefault();
+    if (query.trim()) {
+      const formattedQuery = query.charAt(0).toUpperCase() + query.slice(1);
+      navigate(`/searchResults?query=${encodeURIComponent(formattedQuery)}`);
     }
   };
 
@@ -54,18 +56,19 @@ const Header = ({ query, setQuery }) => {
               alt=""
             />
             <div className="float-end py-2 text-secondary">
-              <input
-                onChange={searchHandler}
-                style={{
-                  width: "220px",
-                  border: "none",
-                }}
-                onKeyDown={keyDownHandler}
-                className="form-control py-2 text-secondary"
-                type="text"
-                value={query}
-                placeholder="Search by title and tags"
-              />
+              <form onSubmit={searchHandler}>
+                <input
+                  onChange={(e) => setQuery(e.target.value)}
+                  style={{
+                    width: "220px",
+                    border: "none",
+                  }}
+                  className="form-control py-2 text-secondary"
+                  type="text"
+                  value={query}
+                  placeholder="Search by title and tags"
+                />
+              </form>
             </div>
           </div>
         </nav>
