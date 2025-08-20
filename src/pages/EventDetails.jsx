@@ -17,24 +17,14 @@ const EventDetails = () => {
         {loading ? (
           <p>Loading...</p>
         ) : data ? (
-          <section
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <div
-              style={{
-                width: "50%",
-              }}
-            >
+          <section className="row gy-4">
+            {/* Left Column */}
+            <div className="col-12 col-lg-7">
               <h2>{data.title}</h2>
               <p className="mt-3 mb-0">Hosted By:</p>
               <strong>{data.hostName}</strong>
-              <br />
               <img
-                width="600px"
-                className="img-fluid mt-4 mb-2"
+                className="img-fluid mt-4 mb-2 rounded"
                 src={data.imageUrl}
                 alt="img"
               />
@@ -50,65 +40,49 @@ const EventDetails = () => {
                 {data.ageRestrictions}
               </p>
               <h4 className="my-3">Event Tags:</h4>
-              {data.tags.map((tag) => (
-                <p
-                  style={{
-                    display: "inline",
-                    marginRight: "10px",
-                    color: "white",
-                    background: "rgb(239 66 0)",
-                    padding: "10px",
-                    borderRadius: "10px",
-                  }}
-                >
-                  {tag}
-                </p>
-              ))}
+              <div className="d-flex flex-wrap gap-2">
+                {data.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1 rounded text-white fw-semibold"
+                    style={{
+                      backgroundColor: "rgb(239 66 0)",
+                      fontSize: "0.9rem",
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
-            <div
-              className="mt-2"
-              style={{
-                width: "35%",
-              }}
-            >
-              <div className="row container py-3 mb-3 bg-white">
-                <div className=" text-secondary col-md-1 mt-2">
+
+            {/* Right Column */}
+            <div className="col-12 col-lg-5">
+              <div className="row g-3 bg-white p-3 rounded shadow-sm">
+                <div className="col-1 text-secondary">
                   <FaClock />
                 </div>
-                <div className="col-md-11">
+                <div className="col-11">
                   {data.startDate} to <br />
                   {data.endDate}
                 </div>
-                <div className=" text-secondary col-md-1 mt-3">
+                <div className="col-1 text-secondary">
                   <FaMapMarkerAlt />
                 </div>
-                <div className="col-md-11 mt-3">{data.address}</div>
-                <div className=" text-secondary col-md-1 mt-3">
+                <div className="col-11">{data.address}</div>
+                <div className="col-1 text-secondary">
                   <FaRupeeSign />
                 </div>
-                <div className="col-md-11 mt-3">{data.price}</div>
+                <div className="col-11">{data.price}</div>
               </div>
-              <h4 className="mt-5">Speakers({data.speakers.length}):</h4>
-              <div className="row mt-3">
-                {data.speakers.map((speaker) => (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      backgroundColor: "white",
-                      gap: "3rem",
-                      marginRight: "30px",
-                    }}
-                    className="col-md-5 py-2"
-                  >
-                    <div
-                      style={{
-                        display: "ruby",
-                      }}
-                      className="text-center"
-                    >
+
+              <h4 className="mt-5">Speakers ({data.speakers.length}):</h4>
+              <div className="row g-3 mt-3">
+                {data.speakers.map((speaker, index) => (
+                  <div key={index} className="col-12 col-sm-6">
+                    <div className="bg-white p-3 rounded text-center shadow-sm">
                       <div
+                        className="mx-auto mb-2"
                         style={{
                           width: "100px",
                           height: "100px",
@@ -126,27 +100,15 @@ const EventDetails = () => {
                           }}
                         />
                       </div>
-
                       <h6 className="mb-0">{speaker.name}</h6>
                       <p className="mb-0">{speaker.department}</p>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="text-center mt-5">
-                <button
-                  style={{
-                    color: "white",
-                    background: "rgb(239 66 0)",
-                    borderColor: "rgb(239 66 0)",
-                    padding: "8px",
-                    borderRadius: "6px",
-                    width: "170px",
-                    fontSize: "small",
-                    fontWeight: "600",
-                    fontFamily: "sans-serif",
-                  }}
-                >
+
+              <div className="text-center mt-4">
+                <button className="btn btn-danger fw-semibold px-4 py-2">
                   RSVP
                 </button>
               </div>
