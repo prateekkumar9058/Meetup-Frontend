@@ -24,6 +24,9 @@ const EventDetails = () => {
               <p className="mt-3 mb-0">Hosted By:</p>
               <strong>{data.hostName}</strong>
               <img
+                style={{
+                  display: "block",
+                }}
                 className="img-fluid mt-4 mb-2 rounded"
                 src={data.imageUrl}
                 alt="img"
