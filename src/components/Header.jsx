@@ -1,24 +1,40 @@
 import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [query, setQuery] = useState("");
+  let [query, setQuery] = useState("");
+  const [otherQuery, setOtherQuery] = useState("");
   const location = useLocation();
+
+  const changeHandler = (e) => {
+    setQuery(e.target.value);
+    setOtherQuery();
+    console.log(
+      window.location.href.slice(0, 41) ===
+        `http://localhost:5173/searchResults?query`,
+      query.length
+    );
+    if (
+      window.location.href.slice(0, 41) ==
+        `http://localhost:5173/searchResults?query` &&
+      query.length == 1
+    ) {
+      navigate(`/searchResults?query=`);
+    }
+  };
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const q = params.get("query") || "";
+    let q = params.get("query") || "";
     setQuery(q);
   }, [location]);
 
   const searchHandler = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      const formattedQuery = query.charAt(0).toUpperCase() + query.slice(1);
-      navigate(`/searchResults?query=${encodeURIComponent(formattedQuery)}`);
+      navigate(`/searchResults?query=${encodeURIComponent(query)}`);
     }
   };
 
@@ -58,7 +74,7 @@ const Header = () => {
             <div className="float-end py-2 text-secondary">
               <form onSubmit={searchHandler}>
                 <input
-                  onChange={(e) => setQuery(e.target.value)}
+                  onChange={changeHandler}
                   style={{
                     width: "220px",
                     border: "none",
