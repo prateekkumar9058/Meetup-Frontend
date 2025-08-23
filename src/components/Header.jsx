@@ -11,14 +11,9 @@ const Header = () => {
   const changeHandler = (e) => {
     setQuery(e.target.value);
     setOtherQuery();
-    console.log(
-      window.location.href.slice(0, 41) ===
-        `http://localhost:5173/searchResults?query`,
-      query.length
-    );
     if (
-      window.location.href.slice(0, 41) ==
-        `http://localhost:5173/searchResults?query` &&
+      window.location.href.slice(0, 96) ==
+        `https://meetup-frontend-git-main-prateek-kumars-projects-66bff71f.vercel.app/searchResults?query` &&
       query.length == 1
     ) {
       navigate(`/searchResults?query=`);
