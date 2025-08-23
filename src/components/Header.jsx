@@ -12,8 +12,8 @@ const Header = () => {
     setQuery(e.target.value);
     setOtherQuery();
     if (
-      window.location.href.slice(0, 96) ==
-        `https://meetup-frontend-git-main-prateek-kumars-projects-66bff71f.vercel.app/searchResults?query` &&
+      window.location.href.slice(0, 58) ==
+        `https://meetup-frontend-six.vercel.app/searchResults?query` &&
       query.length == 1
     ) {
       navigate(`/searchResults?query=`);
